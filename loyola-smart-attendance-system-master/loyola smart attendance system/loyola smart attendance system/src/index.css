@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Loyola Smart Attendance System - Design System */
+@layer base {
+  :root {
+    /* 2025 Modern Design - Loyola Brand Colors */
+    --primary: 228 94% 67%; /* Modern Electric Blue */
+    --primary-light: 228 94% 77%;
+    --primary-dark: 228 94% 57%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 280 100% 70%; /* Vibrant Purple */
+    --secondary-light: 280 100% 80%;
+    --secondary-dark: 280 100% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 142 76% 36%; /* Success Green */
+    --accent-light: 142 76% 46%;
+    --accent-foreground: 0 0% 100%;
+
+    --warning: 25 95% 53%; /* Modern Orange */
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Neutrals */
+    --background: 0 0% 100%;
+    --foreground: 222 84% 5%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 5%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 211 100% 45%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* 2025 Modern Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
+    --gradient-neon: linear-gradient(45deg, hsl(var(--primary)), hsl(280 100% 80%), hsl(var(--accent)));
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 8px hsla(var(--primary), 0.1);
+    --shadow-medium: 0 4px 16px hsla(var(--primary), 0.15);
+    --shadow-strong: 0 8px 32px hsla(var(--primary), 0.2);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --animation-bounce: bounce 2s infinite;
+    
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222 84% 5%;
+    --foreground: 210 40% 98%;
+    --card: 222 84% 5%;
+    --card-foreground: 210 40% 98%;
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border transition-colors duration-200;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+/* Loyola Smart Attendance Components */
+@layer components {
+  .loyola-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .loyola-card {
+    @apply bg-card border border-border rounded-xl p-6;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .loyola-card-hover {
+    @apply loyola-card hover:shadow-lg transition-shadow duration-200;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .loyola-card-hover:hover {
+    box-shadow: var(--shadow-medium);
+  }
+
+  .loyola-gradient-bg {
+    background: var(--gradient-hero);
+  }
+
+  .loyola-gradient-text {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .loyola-sidebar {
+    @apply w-64 bg-card border-r border-border min-h-screen;
+    background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary-dark)));
+  }
+
+  .loyola-nav-item {
+    @apply flex items-center gap-3 px-4 py-3 text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/10 rounded-lg transition-all duration-200;
+  }
+
+  .loyola-nav-item.active {
+    @apply bg-primary-foreground/20 text-primary-foreground;
+  }
+
+  .loyola-btn-primary {
+    @apply bg-primary hover:bg-primary-dark text-primary-foreground font-medium px-6 py-3 rounded-lg;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .loyola-btn-primary:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-1px);
+  }
+
+  .loyola-btn-secondary {
+    @apply bg-secondary hover:bg-secondary-dark text-secondary-foreground font-medium px-6 py-3 rounded-lg;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .loyola-btn-secondary:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-1px);
+  }
+
+  .loyola-input {
+    @apply w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent;
+    transition: var(--transition-smooth);
+  }
+
+  .loyola-stats-card {
+    @apply loyola-card-hover relative overflow-hidden;
+  }
+
+  .loyola-stats-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1;
+    background: var(--gradient-primary);
+  }
+
+  .loyola-face-detection {
+    @apply relative rounded-xl overflow-hidden;
+    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+
+  /* Camera styles */
+  .loyola-camera-container {
+    @apply relative rounded-lg overflow-hidden bg-muted border-2 border-border;
+    transition: var(--transition-smooth);
+  }
+
+  .loyola-camera-container::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none opacity-10;
+    background: linear-gradient(45deg, hsl(var(--primary)), transparent);
+    z-index: 1;
+  }
+
+  .loyola-attendance-status.present {
+    @apply text-accent font-semibold;
+  }
+
+  .loyola-attendance-status.absent {
+    @apply text-destructive font-semibold;
+  }
+
+  .loyola-chat-bot {
+    @apply fixed bottom-6 right-6 z-50;
+  }
+
+  /* Loading animations */
+  .loyola-loading {
+    @apply animate-pulse;
+  }
+
+  .loyola-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 2025 Scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thumb-primary\/20::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary) / 0.2);
+    border-radius: 3px;
+  }
+
+  .scrollbar-track-transparent::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .loyola-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+
+  /* Responsive utilities */
+  .loyola-mobile-nav {
+    @apply md:hidden fixed inset-0 z-50 bg-background/80 backdrop-blur-sm;
+  }
+}
+
+/* Loyola specific animations and effects */
+.loyola-face-detection {
+  background: linear-gradient(135deg, hsl(var(--primary)/0.1), hsl(var(--secondary)/0.1));
+  border: 2px solid hsl(var(--primary)/0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.loyola-face-detection::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, hsl(var(--primary)/0.1), transparent);
+  animation: face-scan 3s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes face-scan {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Enhanced animations for better UX */
+.loyola-card {
+  transition: all 0.3s ease;
+}
+
+.loyola-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px hsl(var(--primary)/0.15);
+}
+
+.loyola-stats-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.loyola-stats-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)/0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.loyola-stats-card:hover::before {
+  left: 100%;
+}
+
+.loyola-stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px hsl(var(--primary)/0.2);
+}
+
+/* Button animations */
+.loyola-btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.loyola-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: hsl(var(--primary-foreground)/0.2);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.loyola-btn-primary:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Pulsing animations for status indicators */
+.animate-pulse-custom {
+  animation: pulse-custom 2s infinite;
+}
+
+@keyframes pulse-custom {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Floating animation for call-to-action elements */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
